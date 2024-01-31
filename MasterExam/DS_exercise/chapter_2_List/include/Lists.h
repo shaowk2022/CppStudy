@@ -20,6 +20,11 @@ typedef enum RETCODE {
 LNode* create_ListHeader(int e);
 
 /**
+ * @brief 创建定长链表
+*/
+RETCODE create_Lists(LNode** head, int length);
+
+/**
  * @brief 头插法
  * @note 注意这里的头指针要用二级指针来传递，以使形参改变实参
 */
