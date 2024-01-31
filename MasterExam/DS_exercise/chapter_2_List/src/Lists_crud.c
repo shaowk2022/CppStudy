@@ -23,6 +23,24 @@ RETCODE insert_from_head(LNode** head, int e){
     return OK;
 }
 
+RETCODE insert_from_tail(LNode* head, int e){
+    if(head == NULL){
+        perror("Head is NULL. Insert failed.");
+        return ERROR;
+    }
+    // 找到链表尾
+    LNode* tail = head;
+    while (tail->next)
+    {
+        tail = tail->next;
+    }
+    LNode* newNode = (LNode*)malloc(sizeof(LNode));
+    newNode->data = e;
+    newNode->next = NULL;
+    tail->next = newNode;
+    return OK;
+}
+
 void traverse_Lists(LNode* head){
     LNode* temp = head;
     puts("Value: ");
