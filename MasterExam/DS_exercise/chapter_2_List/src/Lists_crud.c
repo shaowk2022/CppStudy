@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include "Lists.h"
+
 LNode* create_ListHeader(int e){
     LNode* head = (LNode*)malloc(sizeof(LNode));
     head->data = e;
@@ -9,7 +10,6 @@ LNode* create_ListHeader(int e){
     return head;
 }
 
-/*注意这里的头指针要用二级指针来传递，以使形参改变实参*/
 RETCODE insert_from_head(LNode** head, int e){
     if (head == NULL)
     {
