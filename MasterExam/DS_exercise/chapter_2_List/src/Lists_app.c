@@ -1,8 +1,9 @@
 #include <stdio.h>
 
 #include "Lists.h"
+#include "Lists_app.h"
 
-void main(){
+void run_Lists_app(){
     int length = 0;  // 长度
     RETCODE retCode = OK;
     LNode* head = create_ListHeader(0);
@@ -16,7 +17,7 @@ void main(){
     retCode = create_Lists(&head, length);
     if(retCode == ERROR){
         puts("create failed.");
+        return;
     }
     traverse_Lists(head);
-
 }

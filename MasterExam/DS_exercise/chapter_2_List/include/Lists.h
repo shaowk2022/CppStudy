@@ -1,5 +1,5 @@
-#ifndef _LISTS_H_
-#define _LISTS_H_
+#ifndef LISTS_H
+#define LISTS_H
 
 #define MAX_SIZE 100
 
@@ -21,6 +21,7 @@ LNode* create_ListHeader(int e);
 
 /**
  * @brief 创建定长链表
+ * @note 注意这里的头指针要用二级指针来传递，以使形参改变实参
 */
 RETCODE create_Lists(LNode** head, int length);
 
@@ -40,4 +41,4 @@ RETCODE insert_from_tail(LNode* head, int e);
 */
 void traverse_Lists(LNode* head);
 
-#endif  // _LISTS_H_
+#endif  // LISTS_H

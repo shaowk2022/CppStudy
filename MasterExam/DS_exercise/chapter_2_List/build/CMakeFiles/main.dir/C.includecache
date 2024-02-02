@@ -8,11 +8,15 @@
 
 ../include/Lists.h
 
-/home/wenke/Study/MasterExam/DS_exercise/chapter_2_List/src/List_crud_main.c
+../include/Lists_app.h
+
+/home/wenke/Study/MasterExam/DS_exercise/chapter_2_List/src/Lists_app.c
 stdio.h
 -
 Lists.h
 /home/wenke/Study/MasterExam/DS_exercise/chapter_2_List/src/Lists.h
+Lists_app.h
+/home/wenke/Study/MasterExam/DS_exercise/chapter_2_List/src/Lists_app.h
 
 /home/wenke/Study/MasterExam/DS_exercise/chapter_2_List/src/Lists_crud.c
 stdlib.h
@@ -21,4 +25,8 @@ stdio.h
 -
 Lists.h
 /home/wenke/Study/MasterExam/DS_exercise/chapter_2_List/src/Lists.h
+
+/home/wenke/Study/MasterExam/DS_exercise/chapter_2_List/src/main.c
+Lists_app.h
+/home/wenke/Study/MasterExam/DS_exercise/chapter_2_List/src/Lists_app.h
 

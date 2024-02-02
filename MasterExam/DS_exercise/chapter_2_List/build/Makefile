@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Lists_CRUD_main
+# Target rules for targets named main
 
 # Build rule for target.
-Lists_CRUD_main: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Lists_CRUD_main
-.PHONY : Lists_CRUD_main
+main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 main
+.PHONY : main
 
 # fast build rule for target.
-Lists_CRUD_main/fast:
-	$(MAKE) -f CMakeFiles/Lists_CRUD_main.dir/build.make CMakeFiles/Lists_CRUD_main.dir/build
-.PHONY : Lists_CRUD_main/fast
+main/fast:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
+.PHONY : main/fast
 
-src/List_crud_main.o: src/List_crud_main.c.o
+src/Lists_app.o: src/Lists_app.c.o
 
-.PHONY : src/List_crud_main.o
+.PHONY : src/Lists_app.o
 
 # target to build an object file
-src/List_crud_main.c.o:
-	$(MAKE) -f CMakeFiles/Lists_CRUD_main.dir/build.make CMakeFiles/Lists_CRUD_main.dir/src/List_crud_main.c.o
-.PHONY : src/List_crud_main.c.o
+src/Lists_app.c.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Lists_app.c.o
+.PHONY : src/Lists_app.c.o
 
-src/List_crud_main.i: src/List_crud_main.c.i
+src/Lists_app.i: src/Lists_app.c.i
 
-.PHONY : src/List_crud_main.i
+.PHONY : src/Lists_app.i
 
 # target to preprocess a source file
-src/List_crud_main.c.i:
-	$(MAKE) -f CMakeFiles/Lists_CRUD_main.dir/build.make CMakeFiles/Lists_CRUD_main.dir/src/List_crud_main.c.i
-.PHONY : src/List_crud_main.c.i
+src/Lists_app.c.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Lists_app.c.i
+.PHONY : src/Lists_app.c.i
 
-src/List_crud_main.s: src/List_crud_main.c.s
+src/Lists_app.s: src/Lists_app.c.s
 
-.PHONY : src/List_crud_main.s
+.PHONY : src/Lists_app.s
 
 # target to generate assembly for a file
-src/List_crud_main.c.s:
-	$(MAKE) -f CMakeFiles/Lists_CRUD_main.dir/build.make CMakeFiles/Lists_CRUD_main.dir/src/List_crud_main.c.s
-.PHONY : src/List_crud_main.c.s
+src/Lists_app.c.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Lists_app.c.s
+.PHONY : src/Lists_app.c.s
 
 src/Lists_crud.o: src/Lists_crud.c.o
 
@@ -156,7 +156,7 @@ src/Lists_crud.o: src/Lists_crud.c.o
 
 # target to build an object file
 src/Lists_crud.c.o:
-	$(MAKE) -f CMakeFiles/Lists_CRUD_main.dir/build.make CMakeFiles/Lists_CRUD_main.dir/src/Lists_crud.c.o
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Lists_crud.c.o
 .PHONY : src/Lists_crud.c.o
 
 src/Lists_crud.i: src/Lists_crud.c.i
@@ -165,7 +165,7 @@ src/Lists_crud.i: src/Lists_crud.c.i
 
 # target to preprocess a source file
 src/Lists_crud.c.i:
-	$(MAKE) -f CMakeFiles/Lists_CRUD_main.dir/build.make CMakeFiles/Lists_CRUD_main.dir/src/Lists_crud.c.i
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Lists_crud.c.i
 .PHONY : src/Lists_crud.c.i
 
 src/Lists_crud.s: src/Lists_crud.c.s
@@ -174,8 +174,35 @@ src/Lists_crud.s: src/Lists_crud.c.s
 
 # target to generate assembly for a file
 src/Lists_crud.c.s:
-	$(MAKE) -f CMakeFiles/Lists_CRUD_main.dir/build.make CMakeFiles/Lists_CRUD_main.dir/src/Lists_crud.c.s
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Lists_crud.c.s
 .PHONY : src/Lists_crud.c.s
+
+src/main.o: src/main.c.o
+
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.c.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/main.c.o
+.PHONY : src/main.c.o
+
+src/main.i: src/main.c.i
+
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.c.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/main.c.i
+.PHONY : src/main.c.i
+
+src/main.s: src/main.c.s
+
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.c.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/main.c.s
+.PHONY : src/main.c.s
 
 # Help Target
 help:
@@ -185,13 +212,16 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... Lists_CRUD_main"
-	@echo "... src/List_crud_main.o"
-	@echo "... src/List_crud_main.i"
-	@echo "... src/List_crud_main.s"
+	@echo "... main"
+	@echo "... src/Lists_app.o"
+	@echo "... src/Lists_app.i"
+	@echo "... src/Lists_app.s"
 	@echo "... src/Lists_crud.o"
 	@echo "... src/Lists_crud.i"
 	@echo "... src/Lists_crud.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 .PHONY : help
 
 
