@@ -9,6 +9,15 @@ void InitStaticSqList(StaticSqList* L){
     L->length = 0;
 }
 
+void PrintStaticSqList(StaticSqList L){
+    puts("the value of Lists: ");
+    for(int i = 0; i < L.length; i++){
+        printf("%d\t", L.data[i]);
+    }
+    puts("");
+}
+
+
 void InitSqList(SqList* L, int MaxSize){
     L->data = (int*)malloc(sizeof(L->data) * MaxSize);
     for(int i = 0; i < MaxSize; i++){
@@ -16,14 +25,6 @@ void InitSqList(SqList* L, int MaxSize){
     }
     L->length = 0;
     L->MaxSize = MaxSize;
-}
-
-void PrintStaticSqList(StaticSqList L){
-    puts("the value of Lists: ");
-    for(int i = 0; i < L.length; i++){
-        printf("%d\t", L.data[i]);
-    }
-    puts("");
 }
 
 void PrintSqLists(SqList L){
