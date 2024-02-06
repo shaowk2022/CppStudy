@@ -6,11 +6,11 @@ void run_app(){
     InitStaticSqList(&SL);
     // PrintStaticSqList(SL);
     // PRINT_LISTS(SL);
-    puts("=======================");
     SqList L;
     InitSqList(&L, 10);
     // PrintSqLists(L);
     // PRINT_LISTS(L);
+    puts("============初始化完成============");
     puts("============插入5个元素===========");
     for (int i = 0; i < 5; i++)
     {
@@ -39,7 +39,7 @@ void run_app(){
 }
 
 int main(){
-    
+
     run_app();
 
     return 0;
