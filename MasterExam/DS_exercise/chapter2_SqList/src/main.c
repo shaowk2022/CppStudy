@@ -36,6 +36,9 @@ void run_app(){
     puts("============按值查找===========");
     printf("StaticSqListGetElemByVal(SL, 1): %d\n", StaticSqListGetElemByVal(SL, 1));
     printf("SqListGetElemByVal(L, 3)       : %d\n", SqListGetElemByVal(L, 3));
+    LOG("============测试判空函数===========");
+    printf("%s\n", IS_EMPTY(SL) ? "null" : "not null");
+    printf("%s\n", IS_EMPTY(L) ? "null" : "not null");
 }
 
 int main(){

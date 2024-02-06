@@ -19,6 +19,9 @@
 #define LOG(msg) \
         puts(msg)  \
 
+// 顺序表判空宏函数
+#define IS_EMPTY(L) ((L).length == 0 ? 1 : 0)
+
 /**
  * @brief 顺序表静态分配
  * @date  2024年2月6日01点03分
