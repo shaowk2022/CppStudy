@@ -17,7 +17,7 @@ void run_app(){
         StaticSqListInsert(&SL, i + 1, i + 1);
         SqListInsert(&L, i + 1, i + 1);
     }
-    StaticSqListInsert(&SL, 2, 10) ? puts("success") : puts("failed");
+    StaticSqListInsert(&SL, 2, 10) ? LOG("success") : LOG("failed");
     SqListInsert(&L, 4, 20) ? puts("success") : puts("failed");
     puts("\n============插入后===========");
     PRINT_LISTS(SL);

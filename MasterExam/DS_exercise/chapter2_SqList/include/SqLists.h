@@ -15,6 +15,10 @@
         puts("");  \
     }  \
 
+// 打印信息宏函数
+#define LOG(msg) \
+        puts(msg)  \
+
 /**
  * @brief 顺序表静态分配
  * @date  2024年2月6日01点03分
