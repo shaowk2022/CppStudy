@@ -48,4 +48,5 @@ CMakeFiles/main.dir/src/SqLists.c.o: \
  /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /home/wenke/Study/CppStudy/MasterExam/DS_exercise/chapter2_SqList/include/SqLists.h
+ /home/wenke/Study/CppStudy/MasterExam/DS_exercise/chapter2_SqList/include/SqLists.h \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h

@@ -35,3 +35,31 @@ void PrintSqLists(SqList L){
     }
     puts("");
 }
+
+bool StaticSqListInsert(StaticSqList* L, int pos, int e){
+    if(pos < 1 || pos > (L->length + 1)){
+        return false;
+    }
+    if(L->length >= MaxLength)
+        return false;
+    for(int i = L->length; i >= pos; i--){
+        L->data[i] = L->data[i - 1];
+    }
+    L->data[pos - 1]  = e;
+    L->length++;
+    return true;
+}
+
+bool SqListInsert(SqList* L, int pos, int e){
+    if(pos < 1 || pos > (L->length + 1)){
+        return false;
+    }
+    if(L->length >= L->MaxSize)
+        return false;
+    for(int i = L->length; i >= pos; i--){
+        L->data[i] = L->data[i - 1];
+    }
+    L->data[pos - 1] = e;
+    L->length++;
+    return true;
+}

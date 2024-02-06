@@ -1,7 +1,9 @@
 #ifndef SQLISTS_H
 #define SQLISTS_H
 
-#define MaxLength 50
+#include <stdbool.h>
+
+#define MaxLength 10
 
 // 将顺序表的打印定义为宏，以实现重载
 #define PRINT_LISTS(L) \
@@ -34,6 +36,11 @@ void InitStaticSqList(StaticSqList* L);
 */
 void PrintStaticSqList(StaticSqList L);
 
+/**
+ * @brief 静态顺序表插入元素
+ * @date  2024年2月6日11点10分
+*/
+bool StaticSqListInsert(StaticSqList* L, int pos, int e);
 
 /**
  * @brief 顺序表动态分配
@@ -57,5 +64,10 @@ void InitSqList(SqList* L, int MaxSize);
 */
 void PrintSqLists(SqList L);
 
+/**
+ * @brief 动态顺序表插入元素
+ * @date  2024年2月6日11点25分
+*/
+bool SqListInsert(SqList* L, int pos, int e);
 
 #endif // SQLISTS_H
