@@ -52,6 +52,17 @@ bool StaticSqListInsert(StaticSqList* L, int pos, int e);
 */
 bool StaticSqListDelete(StaticSqList* L, int pos, /*记录所删元素*/int* e);
 
+/**
+ * @brief 静态顺序表按位查找
+ * @date  2024年2月6日13点44分
+*/
+int StaticSqListGetElemByPos(StaticSqList L, int pos);
+
+/**
+ * @brief 静态顺序表按值查找
+ * @date  2024年2月6日13点56分
+*/
+int StaticSqListGetElemByVal(StaticSqList L, int e);
 
 /**
  * @brief 顺序表动态分配
@@ -86,5 +97,17 @@ bool SqListInsert(SqList* L, int pos, int e);
  * @date  2024年2月6日13点28分
 */
 bool SqListDelete(SqList* L, int pos, /*记录所删元素*/int* e);
+
+/**
+ * @brief 动态顺序表按位查找
+ * @date  2024年2月6日13点44分
+*/
+int SqListGetElemByPos(SqList L, int pos);
+
+/**
+ * @brief 动态顺序表按值查找
+ * @date  2024年2月6日13点56分
+*/
+int SqListGetElemByVal(SqList L, int e);
 
 #endif // SQLISTS_H

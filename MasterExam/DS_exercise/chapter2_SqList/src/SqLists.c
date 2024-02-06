@@ -87,3 +87,29 @@ bool SqListDelete(SqList* L, int pos, int* e){
     L->length--;
     return true;
 }
+
+int StaticSqListGetElemByPos(StaticSqList L, int pos){
+    return L.data[pos - 1];
+}
+
+int SqListGetElemByPos(SqList L, int pos){
+    return L.data[pos - 1];
+}
+
+int StaticSqListGetElemByVal(StaticSqList L, int e){
+    int pos = 0;    // 返回第一个找到的目标元素的位序
+    for(int i = 0; i < L.length; i++){
+        if(e == L.data[i])
+            pos = i + 1;
+    }
+    return pos;
+}
+
+int SqListGetElemByVal(SqList L, int e){
+    int pos = 0;    // 返回第一个找到的目标元素的位序
+    for(int i = 0; i < L.length; i++){
+        if(e == L.data[i])
+            pos = i + 1;
+    }
+    return pos;
+}
