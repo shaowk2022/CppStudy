@@ -47,6 +47,13 @@ void PrintStaticSqList(StaticSqList L);
 bool StaticSqListInsert(StaticSqList* L, int pos, int e);
 
 /**
+ * @brief 静态顺序表删除元素
+ * @date  2024年2月6日13点27分
+*/
+bool StaticSqListDelete(StaticSqList* L, int pos, /*记录所删元素*/int* e);
+
+
+/**
  * @brief 顺序表动态分配
  * @date  2024年2月6日01点13分
 */
@@ -73,5 +80,11 @@ void PrintSqLists(SqList L);
  * @date  2024年2月6日11点25分
 */
 bool SqListInsert(SqList* L, int pos, int e);
+
+/**
+ * @brief 动态顺序表删除元素
+ * @date  2024年2月6日13点28分
+*/
+bool SqListDelete(SqList* L, int pos, /*记录所删元素*/int* e);
 
 #endif // SQLISTS_H

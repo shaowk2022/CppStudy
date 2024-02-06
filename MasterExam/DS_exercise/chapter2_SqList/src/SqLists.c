@@ -63,3 +63,27 @@ bool SqListInsert(SqList* L, int pos, int e){
     L->length++;
     return true;
 }
+
+bool StaticSqListDelete(StaticSqList* L, int pos, int* e){
+    if(pos < 1 || pos > L->length){
+        return false;
+    }
+    *e = L->data[pos - 1];
+    for(int i = pos; i < L->length; i++){
+        L->data[i - 1] = L->data[i];
+    }
+    L->length--;
+    return true;
+}
+
+bool SqListDelete(SqList* L, int pos, int* e){
+    if(pos < 1 || pos > L->length){
+        return false;
+    }
+    *e = L->data[pos - 1];
+    for(int i = pos; i < L->length; i++){
+        L->data[i - 1] = L->data[i];
+    }
+    L->length--;
+    return true;
+}

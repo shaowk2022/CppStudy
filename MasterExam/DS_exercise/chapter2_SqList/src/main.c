@@ -18,8 +18,16 @@ void run_app(){
         SqListInsert(&L, i + 1, i + 1);
     }
     StaticSqListInsert(&SL, 2, 10) ? LOG("success") : LOG("failed");
-    SqListInsert(&L, 4, 20) ? puts("success") : puts("failed");
+    SqListInsert(&L, 4, 20) ? LOG("success") : LOG("failed");
     puts("\n============插入后===========");
+    PRINT_LISTS(SL);
+    PRINT_LISTS(L);
+    puts("\n============删除后===========");
+    int e = 0;
+    StaticSqListDelete(&SL, 2, &e) ? LOG("success") : LOG("failed");
+    printf("StaticSqListDelete 删除：%d\n", e);
+    SqListDelete(&L, 4, &e) ? LOG("success") : LOG("failed");
+    printf("SqListDelete       删除：%d\n", e);
     PRINT_LISTS(SL);
     PRINT_LISTS(L);
 }
