@@ -29,5 +29,10 @@ bool InitList(LinkList* L);
 */
 bool IsEmpty(LinkList L);
 
+/**
+ * @brief 按位序插入
+ * @date  2024年2月18日11点13分
+*/
+bool ListInsert(LinkList* L, int pos, int e);
 
 #endif  // LISTS_H

@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = -I/home/wenke/Study/CppStudy/MasterExam/DS_exercise/chapter2_LinearList/include
+C_INCLUDES = -I/home/wenke/Study/CppStudy/MasterExam/DS_exercise/chapter2_LinkList/include
 
 C_FLAGS = 
 

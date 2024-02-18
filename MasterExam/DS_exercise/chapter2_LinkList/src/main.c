@@ -4,7 +4,7 @@
 
 void run_Lists_app(){
     LinkList L;
-    InitList(L);
+    InitList(&L);
 }
 
 void main(){

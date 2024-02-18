@@ -1,10 +1,8 @@
 file(REMOVE_RECURSE
   "../bin/main"
   "../bin/main.pdb"
-  "CMakeFiles/main.dir/src/Lists_app.c.o"
-  "CMakeFiles/main.dir/src/Lists_app.c.o.d"
-  "CMakeFiles/main.dir/src/Lists_crud.c.o"
-  "CMakeFiles/main.dir/src/Lists_crud.c.o.d"
+  "CMakeFiles/main.dir/src/LinkLists.c.o"
+  "CMakeFiles/main.dir/src/LinkLists.c.o.d"
   "CMakeFiles/main.dir/src/main.c.o"
   "CMakeFiles/main.dir/src/main.c.o.d"
 )
