@@ -155,3 +155,58 @@ int Length(LinkList L){
     }
     return len;
 }
+
+LinkList ListTailCreate(LinkList* L){
+    int data = 0;
+    *L = (LinkList)malloc(sizeof(LNode));  // 初始化空表
+    (*L)->next = NULL;
+    LNode* NewNode = NULL;
+    LNode* r = *L;  // 尾指针初始化指向头节点
+    puts("输入结点的值(输入9999时退出): ");
+    scanf("%d", &data);
+    while (data != 9999)
+    {
+        NewNode = (LNode*)malloc(sizeof(LNode));
+        NewNode->data = data;
+        r->next = NewNode;
+        r = NewNode;  // 尾指针指向最后一个结点
+        scanf("%d", &data);
+    }
+    r->next = NULL;
+    return *L;
+}
+
+LinkList ListHeadCreate(LinkList* L){
+    *L = (LinkList)malloc(sizeof(LNode));
+    (*L)->next = NULL;
+    int data = 0;
+    puts("输入结点的值(输入9999时退出): ");
+    scanf("%d", &data);
+    while (data != 9999)
+    {
+        LNode* NewNode = (LNode*)malloc(sizeof(LNode));
+        NewNode->data = data;
+        NewNode->next = (*L)->next;
+        (*L)->next = NewNode;
+        scanf("%d", &data);
+    }
+    return *L;
+}
+
+LinkList ListReverse(LinkList* L){
+    // 1-初始化一个新表
+    LinkList ret = (LinkList)malloc(sizeof(LNode));
+    ret->next = NULL;
+    // 2-拷贝每一个结点并用头插的方式给新表
+    LNode* tmp = (*L)->next;
+    while (tmp != NULL)
+    {
+        LNode* NewNode = (LNode*)malloc(sizeof(LNode));
+        NewNode->data = tmp->data;
+        NewNode->next = ret->next;
+        ret->next = NewNode;
+        tmp = tmp->next;
+    }
+    // 3-旧表指向新表
+    *L = ret;
+}

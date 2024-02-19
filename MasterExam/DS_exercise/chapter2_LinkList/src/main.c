@@ -28,6 +28,18 @@ void run_Lists_app(){
     LNode* tmp = GetNodeByValue(L, 10);
     printf("值为10的结点: %s\n", tmp == NULL ? "不存在" : "存在");
     printf("当前表长(不含头节点): %d\n", Length(L));
+
+#if 0
+    LOG("===========尾插法=============");
+    ListTailCreate(&L);
+    ListPrintElem(L);
+    LOG("===========头插法=============");
+    ListHeadCreate(&L);
+    ListPrintElem(L);
+#endif
+    LOG("===========反转链表=============");
+    ListReverse(&L);
+    ListPrintElem(L);
 }
 
 void main(){

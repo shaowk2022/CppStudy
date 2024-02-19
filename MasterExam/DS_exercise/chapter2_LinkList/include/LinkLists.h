@@ -78,4 +78,23 @@ LNode* GetNodeByValue(LinkList L, int value);
 */
 int Length(LinkList L);
 
+/**
+ * @brief 尾插法建立单链表
+ * @date  2024年2月19日21点42分
+*/
+LinkList ListTailCreate(LinkList* L);
+
+/**
+ * @brief 头插法建立单链表
+ * @date  2024年2月19日21点57分
+ * @note  头插法可用于链表的逆置
+*/
+LinkList ListHeadCreate(LinkList* L);
+
+/**
+ * @brief 链表拷贝逆置
+ * @date  2024年2月19日22点05分
+*/
+LinkList ListReverse(LinkList* L);
+
 #endif  // LISTS_H
