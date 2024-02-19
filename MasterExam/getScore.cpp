@@ -106,14 +106,13 @@ int main() {
                 if(count == 3)
                     break; // 如果只需要在网站可访问时发送一次邮件，就使用break退出循环
             }
-            
-            std::cout << "发送失败, 1 min 后重试 ..." << std::endl;
-            std::this_thread::sleep_for(std::chrono::minutes(1)); // 每隔1分钟检查一次
+            std::cout << "发送失败, 2 mins 后重试 ..." << std::endl;
+            std::this_thread::sleep_for(std::chrono::minutes(2)); // 每隔2分钟检查一次
 
             // 播放音频提醒
         } else {
-            std::cout << "网站暂时无法访问, 1 min 后重试..." << std::endl;
-            std::this_thread::sleep_for(std::chrono::minutes(1)); // 每隔1分钟检查一次
+            std::cout << "网站暂时无法访问, 2 mins 后重试..." << std::endl;
+            std::this_thread::sleep_for(std::chrono::minutes(2)); // 每隔2分钟检查一次
         }
     }
 
