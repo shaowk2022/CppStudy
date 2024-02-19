@@ -8,9 +8,9 @@
 // 邮件配置
 const std::string SMTP_SERVER = "smtp.163.com";
 const int SMTP_PORT = 465;
-const std::string EMAIL_FROM = "shaowk2022@163.com"; // 请替换成你的发件邮箱
-const std::string EMAIL_PASSWORD = "CXUBISXOEVZPNANO"; // 请替换成你的邮箱SMTP服务授权码
-const std::string EMAIL_TO = "shaowk2022@163.com"; // 请替换成收件人的邮箱
+const std::string EMAIL_FROM = "shaowk2022@163.com"; // 发件邮箱
+const std::string EMAIL_PASSWORD = "CXUBISXOEVZPNANO"; // 邮箱SMTP服务授权码
+const std::string EMAIL_TO = "shaowk2022@163.com"; // 收件人邮箱
 const std::string EMAIL_SUBJECT_AVAILABLE = "网站可访问通知";
 const std::string EMAIL_BODY_AVAILABLE = "网站现在可以访问了。";
 
@@ -94,6 +94,7 @@ bool is_website_available(const std::string& url) {
 
 // 主程序
 int main() {
+    unsigned int count = 0;
     std::string url = "https://syk.cqu.edu.cn/cjcx/"; // 学校官网查询网址
     // url = "http://yjszs.tjnu.edu.cn:8080/sscjcx/index";
     while (true) {
@@ -101,7 +102,9 @@ int main() {
             std::cout << "网站可达, 准备发送邮件 ..." << std::endl;
             if(send_email(EMAIL_SUBJECT_AVAILABLE, EMAIL_BODY_AVAILABLE, EMAIL_FROM, EMAIL_TO, EMAIL_PASSWORD)){
                 std::cout << "邮件发送成功 !" << std::endl;
-                break; // 如果只需要在网站可访问时发送一次邮件，就使用break退出循环
+                count++;
+                if(count == 3)
+                    break; // 如果只需要在网站可访问时发送一次邮件，就使用break退出循环
             }
             
             std::cout << "发送失败, 1 min 后重试 ..." << std::endl;
