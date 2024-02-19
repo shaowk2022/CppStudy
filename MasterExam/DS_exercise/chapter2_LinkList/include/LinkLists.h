@@ -33,6 +33,24 @@ bool IsEmpty(LinkList L);
  * @brief 按位序插入
  * @date  2024年2月18日11点13分
 */
-bool ListInsert(LinkList* L, int pos, int e);
+bool ListInsertByPos(LinkList* L, int pos, int e);
+
+/**
+ * @brief 指定结点后插操作
+ * @date  2024年2月19日10点42分
+*/
+bool ListInsertNextNode(LNode* p, int e);
+
+/**
+ * @brief 指定结点前插操作
+ * @date  2024年2月19日11点20分
+*/
+bool ListInsertPriorNode(LNode* p, int e);
+
+/**
+ * @brief 打印链表元素
+ * @date  2024年2月19日10点48分
+*/
+void ListPrintElem(LinkList L);
 
 #endif  // LISTS_H
