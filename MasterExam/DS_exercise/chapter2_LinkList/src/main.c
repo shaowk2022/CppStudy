@@ -27,6 +27,7 @@ void run_Lists_app(){
     printf("链表：%s \n", IsEmpty(L) ? "NULL" : "Not NULL");
     LNode* tmp = GetNodeByValue(L, 10);
     printf("值为10的结点: %s\n", tmp == NULL ? "不存在" : "存在");
+    printf("当前表长(不含头节点): %d\n", Length(L));
 }
 
 void main(){

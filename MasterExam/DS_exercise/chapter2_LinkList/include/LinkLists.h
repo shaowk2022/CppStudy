@@ -72,4 +72,10 @@ LNode* GetNodeByPos(LinkList L, int pos);
 */
 LNode* GetNodeByValue(LinkList L, int value);
 
+/**
+ * @brief 获取链表长度
+ * @date  2024年2月19日17点39分
+*/
+int Length(LinkList L);
+
 #endif  // LISTS_H

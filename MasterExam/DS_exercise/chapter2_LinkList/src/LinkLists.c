@@ -143,3 +143,15 @@ LNode* GetNodeByValue(LinkList L, int value){
     }
     return target;
 }
+
+int Length(LinkList L){
+    int len = 0;
+    LNode* tmp = L;
+    // 如果没有头节点，就判断tmp是否为NULL
+    while (tmp->next != NULL)
+    {
+        tmp = tmp->next;
+        len++;
+    }
+    return len;
+}
