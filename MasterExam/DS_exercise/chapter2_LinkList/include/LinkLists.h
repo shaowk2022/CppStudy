@@ -53,4 +53,23 @@ bool ListInsertPriorNode(LNode* p, int e);
 */
 void ListPrintElem(LinkList L);
 
+/**
+ * @brief 按位序删除
+ * @date  2024年2月19日14点38分
+ * @note  被删除元素用e返回
+*/
+bool ListDeleteByPos(LinkList* L, int pos, int* e);
+
+/**
+ * @brief 按位查找结点
+ * @date  2024年2月19日16点25分
+*/
+LNode* GetNodeByPos(LinkList L, int pos);
+
+/**
+ * @brief 按值查找结点
+ * @date  2024年2月19日16点26分
+*/
+LNode* GetNodeByValue(LinkList L, int value);
+
 #endif  // LISTS_H
