@@ -21,27 +21,30 @@ bool send_email(const std::string& subject, const std::string& body, const std::
     CURLcode res;
     bool ret = true;
 
-    std::stringstream ss;
-    ss << "From: " << from_addr << "\r\n";
-    ss << "To: " << to_addr << "\r\n";
-    ss << "Subject: " << subject << "\r\n";
-    ss << "\r\n"; // 空行分隔头部和正文
-    ss << body;
+    std::string payload = "From: " + from_addr + "\r\n";
+    payload += "To: " + to_addr + "\r\n";
+    payload += "Subject: " + subject + "\r\n";
+    payload += "\r\n"; // 空行分隔头部和正文
+    payload += body;
 
     // 初始化 curl
     curl_global_init(CURL_GLOBAL_ALL);
     curl = curl_easy_init();
     if (curl) {
         // 设置邮件服务器和端口
-        curl_easy_setopt(curl, CURLOPT_URL, ("smtps://" + SMTP_SERVER + ":" + std::to_string(SMTP_PORT)).c_str());
+        std::string url = "smtps://" + SMTP_SERVER + ":" + std::to_string(SMTP_PORT);
+        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 
         // 设置登录账号和密码
         curl_easy_setopt(curl, CURLOPT_USERNAME, from_addr.c_str());
         curl_easy_setopt(curl, CURLOPT_PASSWORD, password.c_str());
 
         // 设置邮件内容
-        curl_easy_setopt(curl, CURLOPT_READDATA, ss.str().c_str());
+        curl_easy_setopt(curl, CURLOPT_READDATA, payload.c_str());
         curl_easy_setopt(curl, CURLOPT_UPLOAD, 1L);
+
+        // 设置libcurl的debug级别
+        curl_easy_setopt(curl, CURLOPT_VERBOSE, 0L);
 
         // 发送邮件
         res = curl_easy_perform(curl);
@@ -97,6 +100,8 @@ int main() {
     unsigned int count = 0;
     std::string url = "https://syk.cqu.edu.cn/cjcx/"; // 学校官网查询网址
     // url = "http://yjszs.tjnu.edu.cn:8080/sscjcx/index";
+    // url = "https://yzs.sues.edu.cn/xscx/";
+
     while (true) {
         if (is_website_available(url)) {
             std::cout << "网站可达, 准备发送邮件 ..." << std::endl;
