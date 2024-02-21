@@ -3,6 +3,7 @@
 #include <string>
 #include <chrono>
 #include <thread>
+#include <ctime>
 #include <curl/curl.h> // 使用 libcurl 发送 HTTP 请求
 
 // 邮件配置
@@ -103,10 +104,13 @@ int main() {
     // url = "https://yzs.sues.edu.cn/xscx/";
 
     while (true) {
+        auto now = std::chrono::system_clock::now();
+        std::time_t now_time = std::chrono::system_clock::to_time_t(now);
+        std::cout << "当前时间：" << std::ctime(&now_time);
         if (is_website_available(url)) {
             std::cout << "网站可达, 准备发送邮件 ..." << std::endl;
             if(send_email(EMAIL_SUBJECT_AVAILABLE, EMAIL_BODY_AVAILABLE, EMAIL_FROM, EMAIL_TO, EMAIL_PASSWORD)){
-                std::cout << "邮件发送成功 !" << std::endl;
+                std::cout << "邮件发送成功 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
                 count++;
                 if(count == 3)
                     break; // 如果只需要在网站可访问时发送一次邮件，就使用break退出循环
