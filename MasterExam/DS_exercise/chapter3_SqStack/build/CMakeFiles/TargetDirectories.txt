@@ -1,0 +1,3 @@
+/home/wenke/Study/CppStudy/MasterExam/DS_exercise/chapter3_SqStack/build/CMakeFiles/main.dir
+/home/wenke/Study/CppStudy/MasterExam/DS_exercise/chapter3_SqStack/build/CMakeFiles/edit_cache.dir
+/home/wenke/Study/CppStudy/MasterExam/DS_exercise/chapter3_SqStack/build/CMakeFiles/rebuild_cache.dir
