@@ -2,16 +2,20 @@
 
 #include "SqStack.h"
 
-void run_stack_app(){
+void run_SqStack_app(){
     SqStack SS;
 
     InitSqStack(&SS);
     printf("%s\n", isEmpty(SS) ? "NULL" : "Not NULL");
-    
+
     Push(&SS, 1);
     Push(&SS, 2);
     Push(&SS, 3);
     printf("%s\n", isEmpty(SS) ? "NULL" : "Not NULL");
+
+    Push(&SS, 4);
+    Push(&SS, 5);
+    printf("%s\n", isFull(SS) ? "FULL" : "Not FULL");
 
     int ret = 0;
     Pop(&SS, &ret);
@@ -29,6 +33,6 @@ void run_stack_app(){
 }
 
 int main(){
-    run_stack_app();
+    run_SqStack_app();
     return 0;
 }

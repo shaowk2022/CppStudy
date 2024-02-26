@@ -37,3 +37,9 @@ bool DestroyStack(SqStack* SS){
     // 因为是用数组申请的空间，所以会被系统自动回收，无需使用free()
     return true;
 }
+
+bool isFull(SqStack SS){
+    if(SS.top == MaxSize - 1)
+        return true;
+    return false;
+}

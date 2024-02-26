@@ -7,7 +7,7 @@
  * @brief 顺序栈定义
  * @date  2024年2月26日21点39分
 */
-#define MaxSize 20
+#define MaxSize 5
 typedef struct {
     int data[MaxSize];
     int top;  // 栈顶指针
@@ -24,6 +24,12 @@ void InitSqStack(SqStack* SS);
  * @date  2024年2月26日21点43分
 */
 bool isEmpty(SqStack SS);
+
+/**
+ * @brief 顺序栈判满
+ * @date  2024年2月26日22点15分
+*/
+bool isFull(SqStack SS);
 
 /**
  * @brief 入栈操作
