@@ -9,7 +9,7 @@
 class PlateRecognize
 {
 public:
-	PlateRecognize(const char* svm_model, const char* ann_model, const char* ann_zh_model);
+	PlateRecognize(const char* svm_model, const char* ann_model, const char* ann_zh_model, const char* cnn_model);
 	~PlateRecognize();
 
 	/**

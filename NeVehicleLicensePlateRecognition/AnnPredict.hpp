@@ -8,7 +8,7 @@ using namespace ml;
 
 class AnnPredict {
 public:
-	AnnPredict(const char* ann_model, const char* ann_zh_model);
+	AnnPredict(const char* ann_model, const char* ann_zh_model, const char* cnn_model);
 	~AnnPredict();
 
 	/**
@@ -31,6 +31,7 @@ public:
 private:
 	Ptr<ANN_MLP> ann; // 字母&数字
 	Ptr<ANN_MLP> ann_zh; // 中文字符
+	cv::dnn::Net cnn;  // cnn识别字母&数字
 	HOGDescriptor* annHog = 0;
 	void getHogFeatures(HOGDescriptor* annHog, Mat src, Mat& dst);
 	static string ZHCHARS[];

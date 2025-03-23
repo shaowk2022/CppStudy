@@ -1,10 +1,10 @@
 #include "PlateRecognize.hpp"
 
-PlateRecognize::PlateRecognize(const char* svm_model, const char* ann_model, const char* ann_zh_model) {
+PlateRecognize::PlateRecognize(const char* svm_model, const char* ann_model, const char* ann_zh_model, const char* cnn_model) {
     sobelLocate = new SobelLocate();
     colorLocate = new ColorLocate();
     svmPredict = new SvmPredict(svm_model);
-    annPredict = new AnnPredict(ann_model, ann_zh_model);
+    annPredict = new AnnPredict(ann_model, ann_zh_model, cnn_model);
 }
 
 PlateRecognize::~PlateRecognize() {

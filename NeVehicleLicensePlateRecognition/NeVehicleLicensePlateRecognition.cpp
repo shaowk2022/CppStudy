@@ -19,8 +19,11 @@ int main(int argc, char* argv[]) {
     const char* annXmlPath = "/home/wenke/Study/CppStudy/NeVehicleLicensePlateRecognition/ann_train/ann.xml";
     const char* annZhXmlPath = "/home/wenke/Study/CppStudy/NeVehicleLicensePlateRecognition/ann_train/ann_zh.xml";
 
+    // cnn模型路径
+    const char* cnnModelPath = "/home/wenke/Study/CppStudy/NeVehicleLicensePlateRecognition/resources/license_plate_cnn.onnx";
+
     Mat src = imread(srcPath);
-    PlateRecognize pr(svmXmlPath, annXmlPath, annZhXmlPath);
+    PlateRecognize pr(svmXmlPath, annXmlPath, annZhXmlPath, cnnModelPath);
 
     // std::locale::global(std::locale("en_US.UTF-8"));
     string str_plate = pr.plateRecognize(src);

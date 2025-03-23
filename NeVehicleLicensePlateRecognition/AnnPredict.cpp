@@ -15,9 +15,11 @@ char AnnPredict::CHARS[] = {
     'Y', 'Z'  // 不包含I和O
 };
 
-AnnPredict::AnnPredict(const char* ann_model, const char* ann_zh_model) {
+AnnPredict::AnnPredict(const char* ann_model, const char* ann_zh_model, const char* cnn_model) {
     ann = ANN_MLP::load(ann_model);
     ann_zh = ANN_MLP::load(ann_zh_model);
+    // cout << "dnn::readNetFromONNX(cnn_model);" << endl;  // DEBUG信息
+    cnn = dnn::readNetFromONNX(cnn_model);  // cnn是dnn::Net类型，栈对象无需手动释放
     annHog = new HOGDescriptor(Size(32, 32), Size(16, 16), Size(8, 8), Size(8, 8), 3);
 }
 
@@ -223,12 +225,45 @@ void AnnPredict::predict(vector<Mat> plateCharMats, string& str_plate) {
         Point minLoc;
 
         if (i) {  // 非0即true
-            // 字母 + 数字
+#if 0
+            // 字母 + 数字 ann 推理
             ann->predict(sample, response);
             minMaxLoc(response, 0, 0, &minLoc, &maxLoc);
             int index = maxLoc.x;  // 样本索引值(CHAR数组的索引值）
             std::cout << "字母数字预测索引: " << index << std::endl; // DEBUG调试输出
             str_plate += CHARS[index];
+#endif
+            // cnn推理字母和数字
+            if(plate_char.channels() == 1) {
+                cvtColor(plate_char, plate_char, cv::COLOR_GRAY2RGB); // 1通道灰度图转为3通道RGB
+            }
+            Mat blob;
+            dnn::blobFromImage(
+                plate_char,
+                blob, 
+                1.0 / 255.0, 
+                Size(64, 64),
+                // Scalar(0, 0, 0), 
+                Scalar(0.485 * 255, 0.456 * 255, 0.406 * 255),  // ImageNet 均值
+                true, 
+                false);
+
+            // // DEBUG: 打印 blob 的形状和类型
+            // std::cout << "Blob shape: " << blob.size << std::endl;
+            // std::cout << "Blob type: " << blob.type() << std::endl;
+
+            // 设置CNN输入
+            cnn.setInput(blob);
+            // 前向传播
+            Mat output = cnn.forward();
+            // 解析输出结果
+            Point maxLoc;
+            minMaxLoc(output.reshape(1, 1), nullptr, nullptr, nullptr, &maxLoc);
+            int index = maxLoc.x;  // 获取预测到的类别索引
+
+            std::cout << "字母/数字预测索引: " << index << std::endl; // DEBUG调试输出
+            str_plate += CHARS[index];
+
         } else {  // 中文
             ann_zh->predict(sample, response);
             minMaxLoc(response, 0, 0, &minLoc, &maxLoc);
