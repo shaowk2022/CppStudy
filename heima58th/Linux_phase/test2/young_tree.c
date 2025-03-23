@@ -3,7 +3,7 @@
  * @date  2025年2月17日
  */
 
-#define _DEFAULT_SOURCE
+#define _DEFAULT_SOURCE  // 处理不认识DT_DIR宏
 
 #include <stdio.h>
 #include <error.h>
@@ -32,6 +32,10 @@ void dfs_print(const char* path, int width){  // width为前面的空格长度
         if(strcmp(filename, ".") == 0 || strcmp(filename, "..") == 0)
             continue;
         
+        // 忽略隐藏文件
+        // if(filename[0] == '.') 
+        //     continue;
+
         // 缩进并打印目录项名称
         for (int i = 0; i < width; i++) {
             putchar('-');

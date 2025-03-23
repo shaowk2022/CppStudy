@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/ann_train.dir/ann_train.cpp.o CMakeFiles/ann_train.dir/utils.cpp.o -o ann_train   -L/home/wenke/lib/opencv4.1.2_install/lib  -Wl,-rpath,/home/wenke/lib/opencv4.1.2_install/lib -lopencv_world 
