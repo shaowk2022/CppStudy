@@ -96,8 +96,7 @@ void PlateLocate::tortuosity(Mat src, vector<RotatedRect>& rects, vector<Mat>& d
         Rect2f safe_rect;
         safeRect(src, roi_rect, safe_rect);
 
-        // 开始处理出候选车牌
-
+        // 开始处理候选矩形区域
         // 矩形大小
         Size roi_rect_size = roi_rect.size;
         // 抠图，在src上定位一个Mat, 然后处理

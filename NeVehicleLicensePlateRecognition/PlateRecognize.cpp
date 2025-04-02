@@ -31,9 +31,12 @@ PlateRecognize::~PlateRecognize() {
 */
 string PlateRecognize::plateRecognize(Mat src) {
     // 1, 车牌定位
+
+    // NOTE: 关闭sobel定位
     // sobel定位结果：初步筛选的候选车牌向量集
-    vector<Mat> sobel_plates;
-    sobelLocate->locate(src, sobel_plates);
+    // vector<Mat> sobel_plates;
+    // sobelLocate->locate(src, sobel_plates);
+
     // 颜色定位
     vector<Mat> color_plates;
     colorLocate->locate(src, color_plates);
@@ -47,31 +50,31 @@ string PlateRecognize::plateRecognize(Mat src) {
     // 2合1
     vector<Mat> plates;  // 2合1的候选车牌集合
 
-    plates.insert(plates.end(), sobel_plates.begin(), sobel_plates.end());
-    plates.insert(plates.end(), color_plates.begin(), color_plates.end());
+    // plates.insert(plates.end(), sobel_plates.begin(), sobel_plates.end());
+    // for(Mat m : sobel_plates) {
+    //     m.release();
+    // }
 
-    for(Mat m : sobel_plates) {
-        m.release();
-    }
+    plates.insert(plates.end(), color_plates.begin(), color_plates.end());
     for(Mat m : color_plates) {
         m.release();
     }
 
-    // char winName[100];
-    // for (int i = 0; i < plates.size(); i++)
-    // {
-    // 	sprintf(winName, "%d候选车牌", i);
-    // 	imshow(winName, plates[i]);
-    // }
+    // DEBUG：输出所有候选车牌
+    char winName[100];
+    for (int i = 0; i < plates.size(); i++)
+    {
+    	sprintf(winName, "%d候选车牌", i);
+    	imshow(winName, plates[i]);
+    }
 
     // 筛选，svm测评
     Mat final_plate;
     svmPredict->doPredict(plates, final_plate);
 
-    // DEBUG: final plate没问题
-    // imshow("final_plate", final_plate);
+    // DEBUG: 显示最终车牌
+    imshow("final_plate", final_plate);
 
-    // DEBUG: 这里返回的字符串有问题
     string str_plate = annPredict->doPredict(final_plate);
 
     // DEBUG：这个字符串有问题

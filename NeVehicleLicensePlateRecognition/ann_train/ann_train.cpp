@@ -101,7 +101,7 @@ void train_zh() {
     layers.at<int>(0) = samples.cols;  // 要预测的数据(图片)的宽
     layers.at<int>(1) = 128;           // 第一层隐藏层神经数 这个是需要调整的 对于我们是不可见的, 修改为128
     layers.at<int>(2) = 128;            // 第二层隐藏层
-    layers.at<int>(3) = 31;            ////输出层 类别数 31种 31个车牌省份 也就是train_label的宽
+    layers.at<int>(3) = 31;            // 输出层 类别数 31种 31个车牌省份 也就是train_label的宽
     // cout << "标签：" << layers << endl;
     classifier->setLayerSizes(layers);
     // https://docs.opencv.org/4.1.1/d0/dce/classcv_1_1ml_1_1ANN__MLP.html#a16998f97db903c1c652e68f342240524

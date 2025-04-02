@@ -2,16 +2,15 @@
 
 string AnnPredict::ZHCHARS[] = {
     "川", "鄂", "赣", "甘", "贵", "桂", "黑", "沪",
-    "冀", "津", "京", "吉", "辽", "鲁", "蒙", "闽", 
-    "宁", "青", "琼", "陕", "苏", "晋", "皖", "湘", 
-    "新", "豫", "渝", "粤", "云", "藏", "浙"
-};
+    "冀", "津", "京", "吉", "辽", "鲁", "蒙", "闽",
+    "宁", "青", "琼", "陕", "苏", "晋", "皖", "湘",
+    "新", "豫", "渝", "粤", "云", "藏", "浙"};
 
 char AnnPredict::CHARS[] = {
     '0', '1', '2', '3', '4', '5', '6', '7',
-    '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 
-    'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 
-    'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 
+    '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
+    'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P',
+    'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
     'Y', 'Z'  // 不包含I和O
 };
 
@@ -37,10 +36,10 @@ AnnPredict::~AnnPredict() {
 string AnnPredict::doPredict(Mat final_plate) {
     // 预处理
     Mat gray;
-    cvtColor(final_plate, gray, COLOR_BGR2GRAY); // 灰度化
+    cvtColor(final_plate, gray, COLOR_BGR2GRAY);  // 灰度化
     Mat shold;
-    threshold(gray, shold, 0, 255, THRESH_OTSU + THRESH_BINARY); // 二值化
-    
+    threshold(gray, shold, 0, 255, THRESH_OTSU + THRESH_BINARY);  // 二值化
+
     // imshow("二值化车牌", shold);  // DEBUG：打印二值化后的车牌
 
     if (!clearMaoDing(shold)) {
@@ -58,7 +57,7 @@ string AnnPredict::doPredict(Mat final_plate) {
     );
     RotatedRect rotatedRect;
     vector<Rect> vec_ann_rects;
-    for(vector<Point> points : contours) {
+    for (vector<Point> points : contours) {
         Rect rect = boundingRect(points);  // 取最小外接矩形（可旋转/带角度）
         // rectangle(final_plate, rect, Scalar(0, 0, 255)); //画红色矩形
         Mat m = shold(rect);
@@ -67,12 +66,15 @@ string AnnPredict::doPredict(Mat final_plate) {
         }
     }
 
-    // DEBUG
+#if 1
+    // DEBUG：在原图上绘制所有字符矩形（绿色）
     // cout << "size: " << vec_ann_rects.size() << endl;
-    // for(Rect rect : vec_ann_rects)
-    // {
-    // 	rectangle(final_plate, rect, Scalar(0, 255, 0)); //画绿色矩形
-    // }
+    Mat debugImg = final_plate.clone();  // 避免修改原图
+    for (const Rect& rect : vec_ann_rects) {
+        rectangle(debugImg, rect, Scalar(0, 255, 0), 1);  // 绿色矩形，线宽=2
+    }
+    imshow("所有字符矩形", debugImg);
+#endif
     // imshow("字符轮廓", final_plate);
 
     // 排序：从左到右
@@ -88,7 +90,7 @@ string AnnPredict::doPredict(Mat final_plate) {
     getChineseRect(vec_ann_rects[cityIndex], chineseRect);
 
     vector<Mat> plateCharMats;                    // 保存7个字符图块
-    plateCharMats.push_back(shold(chineseRect));  // 放入中文字符
+    plateCharMats.push_back(shold(chineseRect));  // 放入中文字符，shold是直接转为二值化图像
     if (vec_ann_rects.size() < 6) {
         return string("未识别到车牌");
     }
@@ -98,11 +100,11 @@ string AnnPredict::doPredict(Mat final_plate) {
     }
 
     // DEBUG：打印从车牌分割出来的每个字符
-    // char winName[100];
-    // for (int i = 0; i < plateCharMats.size(); i++) {
-    //     sprintf(winName, "%d 字符", i);
-    //     imshow(winName, plateCharMats[i]);
-    // }
+    char winName[100];
+    for (int i = 0; i < plateCharMats.size(); i++) {
+        sprintf(winName, "%d 字符", i);
+        imshow(winName, plateCharMats[i]);
+    }
 
     string str_plate;
     predict(plateCharMats, str_plate);
@@ -225,32 +227,29 @@ void AnnPredict::predict(vector<Mat> plateCharMats, string& str_plate) {
         Point minLoc;
 
         if (i) {  // 非0即true
-#if 0
-            // 字母 + 数字 ann 推理
+#ifndef USE_CNN
+            // 字母 + 数字, 默认用ann推理
             ann->predict(sample, response);
             minMaxLoc(response, 0, 0, &minLoc, &maxLoc);
             int index = maxLoc.x;  // 样本索引值(CHAR数组的索引值）
-            std::cout << "字母数字预测索引: " << index << std::endl; // DEBUG调试输出
+            // DEBUG调试输出
+            // std::cout << "字母数字预测索引: " << index << std::endl;
             str_plate += CHARS[index];
-#endif
+#else
             // cnn推理字母和数字
-            if(plate_char.channels() == 1) {
-                cvtColor(plate_char, plate_char, cv::COLOR_GRAY2RGB); // 1通道灰度图转为3通道RGB
+            if (plate_char.channels() == 1) {
+                cvtColor(plate_char, plate_char, cv::COLOR_GRAY2RGB);  // 1通道灰度图转为3通道RGB
             }
             Mat blob;
             dnn::blobFromImage(
                 plate_char,
-                blob, 
-                1.0 / 255.0, 
+                blob,
+                1.0 / 255.0,
                 Size(64, 64),
-                // Scalar(0, 0, 0), 
+                // Scalar(0, 0, 0),
                 Scalar(0.485 * 255, 0.456 * 255, 0.406 * 255),  // ImageNet 均值
-                true, 
+                true,
                 false);
-
-            // // DEBUG: 打印 blob 的形状和类型
-            // std::cout << "Blob shape: " << blob.size << std::endl;
-            // std::cout << "Blob type: " << blob.type() << std::endl;
 
             // 设置CNN输入
             cnn.setInput(blob);
@@ -261,14 +260,15 @@ void AnnPredict::predict(vector<Mat> plateCharMats, string& str_plate) {
             minMaxLoc(output.reshape(1, 1), nullptr, nullptr, nullptr, &maxLoc);
             int index = maxLoc.x;  // 获取预测到的类别索引
 
-            std::cout << "字母/数字预测索引: " << index << std::endl; // DEBUG调试输出
+            std::cout << "字母/数字预测索引: " << index << std::endl;  // DEBUG调试输出
             str_plate += CHARS[index];
-
+#endif
         } else {  // 中文
             ann_zh->predict(sample, response);
             minMaxLoc(response, 0, 0, &minLoc, &maxLoc);
             int index = maxLoc.x;  // 样本索引值(ZHCHAR数组的索引值）
-            std::cout << "汉字预测索引: " << index << std::endl; // DEBUG调试输出
+            // DEBUG调试输出
+            // std::cout << "汉字预测索引: " << index << std::endl;
             str_plate += ZHCHARS[index];
         }
     }
