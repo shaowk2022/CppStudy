@@ -7,7 +7,7 @@
 
 typedef struct {
     int left;
-    int right;
+    int right;  // 区间的左右端点
 } Section;
 
 void print_ids(const char* prefix) {
@@ -18,7 +18,9 @@ void print_ids(const char* prefix) {
 
 void* start_routine(void* args) {
     Section* section = (Section*)args;
-    int* sum = (int*)malloc(sizeof(int));  // 动态分配内存, 否则函数返回时result指向一个无效地址
+    // 动态分配内存, 否则函数返回时result指向一个无效地址
+    // 因为用int sum, 则在栈上的局部变量sum会在函数结束时被销毁, 线程退出时栈被销毁
+    int* sum = (int*)malloc(sizeof(int));
     if (sum == NULL) {
         perror("malloc error");
         pthread_exit(NULL);
@@ -50,7 +52,7 @@ int main(int argc, char const* argv[]) {
         error(1, err, "pthread_create error.\n");
     }
     // 主线程等待返回结果并计算出1-100的和
-    int *result1, *result2;
+    int *result1 = NULL, *result2 = NULL;
     err = pthread_join(tid1, (void**)&result1);  // join()会无限期等待，直到子线程结束
     if (err) {
         error(1, err, "pthread_join error, tid: %lu.\n", tid1);
@@ -62,6 +64,7 @@ int main(int argc, char const* argv[]) {
     printf("sum = %d + %d = %d\n", *result1, *result2, *result1 + *result2);
 
     free(result1);
-    free(result2);  // 释放动态分配的内存
+    free(result2);             // 释放动态分配的内存
+    result1 = result2 = NULL;  // 避免悬空指针
     return 0;
 }
