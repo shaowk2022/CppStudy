@@ -32,7 +32,7 @@ void* start_routine(void* args) {
     withdraw(&acct1, 100);
     return NULL;
 }
-
+ 
 int main(int argc, char const* argv[]) {
     pthread_t t1, t2;
     pthread_create(&t1, NULL, start_routine, NULL);
