@@ -54,7 +54,9 @@ int main(int argc, char const* argv[]) {
     while (1) {
         strcpy(buffer, "hello server");
         send(clientfd, buffer, strlen(buffer), 0);  // 发送数据
-        sleep(2);                                   // 等待2秒
+        printf("Sent: %s\n", buffer);
+        memset(buffer, 0, sizeof(buffer));  // 清空buffer
+        sleep(2);                           // 等待2秒
     }
 
     return 0;

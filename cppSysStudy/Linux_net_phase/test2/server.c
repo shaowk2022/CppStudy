@@ -61,19 +61,22 @@ int main(int argc, char const* argv[]) {
     // 接收连接所用的socket
     struct sockaddr_in client_addr;
     socklen_t addr_len = sizeof(client_addr);
-    int clientfd = accept(listenfd, (struct sockaddr*)&client_addr, &addr_len);  // 获取client的socket描述符
-    ERROR_CHECK(clientfd, -1, "accept");
+    int peerfd = accept(listenfd, (struct sockaddr*)&client_addr, &addr_len);  // 获取client的socket描述符
+    ERROR_CHECK(peerfd, -1, "accept");
     printf("Client connected!\n");
 
     char buffer[1024] = {0};  // 接收数据的缓冲区
     while (1) {
-        recv(clientfd, buffer, sizeof(buffer), 0);  // 接收数据
+        recv(peerfd, buffer, sizeof(buffer), 0);  // 接收数据
         if (strlen(buffer) == 0) {
             printf("No data received.\n");
             sleep(2);  // 等待2秒
             continue;  // 如果没有数据，继续循环
         }
-        printf("Received: %s\n", buffer);  // 打印接收到的数据
+        printf("Received: %s from IP %s:%d\n",
+               buffer,
+               inet_ntoa(client_addr.sin_addr),
+               ntohs(client_addr.sin_port));  // 打印接收到的数据
         // 清空缓冲区
         memset(buffer, 0, sizeof(buffer));
     }
